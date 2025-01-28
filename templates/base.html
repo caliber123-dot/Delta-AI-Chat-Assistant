@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>DeltaAI</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="HTML5 website template">
+    <meta name="keywords" content="global, template, html, sass, jquery">
+    <meta name="author" content="Bucky Maler">
+    <link rel="stylesheet" href="static/css/main.css">
+    <link rel="stylesheet" href="static/css/widget.css">
+    <link rel="stylesheet" href="static/css/style2.css">
+    <style>
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            /* Allows wrapping to the next line on smaller screens */
+            justify-content: center;
+            /* Centers buttons horizontally */
+            gap: 10px;
+            /* Adds space between buttons */
+            margin-bottom: 10px;
+        }
+
+        .mybtn1 {
+            background-color: #2a2c2e;
+            /* Dark background */
+            color: white;
+            /* White text */
+            border: 1px solid red;
+            border-radius: 20px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            width: 200px;
+            flex: 1 1 calc(25% - 20px);
+            /* Each button takes 1/3 of the row with space */
+            max-width: 200px;
+            /* Prevents buttons from getting too wide */
+            text-align: center;
+            font-weight: 300;
+        }
+
+        .mybtn1:hover {
+            background-color: #495057;
+            /* Slightly lighter on hover */
+        }
+
+        @media (max-width: 768px) {
+            .mybtn1 {
+                width: 150px;
+                flex: 1 1 40%;
+                /* Stacks buttons vertically on smaller screens */
+                max-width: 200px;
+            }
+        }
+    </style>
+    <style>
+        .myfont {
+            font-size: 50px;
+            font-weight: 700;
+            padding-top: 30px;
+            line-height: normal;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .myfont {
+                font-size: 40px;
+            }
+        }
+    </style>
+    <style>
+        .textbox-container {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .textbox {
+            padding-right: 40px;
+            /* Make space for the button */
+            /* width: 200px;
+      height: 30px; */
+        }
+
+        .image-button {
+            position: absolute;
+            top: 25px;
+            right: 5px;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: 20px;
+            color: blue;
+        }
+
+        .image-button2 {
+            position: absolute;
+            top: 60px;
+            right: 5px;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: 18px;
+            color: green;
+        }
+
+        .image-button3 {
+            position: absolute;
+            top: 95px;
+            right: 5px;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: 16px;
+            color: red;
+        }
+
+        .image-button5 {
+            position: absolute;
+            top: 130px;
+            right: 5px;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: 20px;
+            color: greenyellow;
+        }
+
+        .image-button4 {
+            position: absolute;
+            top: 170px;
+            right: 280px;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: 16px;
+            color: red;
+        }
+
+        .myicon {
+            color: red;
+            /* font-size: inherit;  */
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+
+<body style="background-color: #020e2c">
+    <!-- notification for small viewports and landscape oriented smartphones -->
+    <div class="device-notification">
+        <a class="device-notification--logo" href="#0">
+            <img src="static/img/logo.png" alt="DeltaAI">
+            <p>Delta AI</p>
+        </a>
+        <p class="device-notification--message">Global has so much to offer that we must request you orient your device
+            to
+            portrait or find a larger screen. You won't be disappointed.</p>
+    </div>
+
+    <div class="perspective effect-rotate-left">
+        <div class="container">
+            <div class="outer-nav--return"></div>
+            <div id="viewport" class="l-viewport">
+                <div class="l-wrapper">
+                    <header class="header">
+                        <a class="header--logo" href="/">
+                            <img src="static/img/logo.png" alt="DeltaAI">
+                            <p>Artificial Intelligence</p>
+                        </a>
+                        <button class="header--cta cta">AI</button>
+                        <div class="header--nav-toggle">
+                            <span></span>
+                        </div>
+                    </header>
+                    <nav class="l-side-nav">
+                        <ul class="side-nav">
+                            <li class="is-active"><span>Home</span></li>
+                            <li><span>Code</span></li>
+                            <li><span>PPT</span></li>
+                            <li><span>Report</span></li>
+                            <li><span>Delta AI</span></li>
+                        </ul>
+                    </nav>
+                    {% block body %}
+
+                    {% endblock body %}
+                    <!-- ============================================================= -->
+                </div>
+            </div>
+        </div>
+        <ul class="outer-nav">
+            <li onclick="myClick1(1)" class="is-active">Home</li>
+            <li onclick="myClick1(2)">Code</li>
+            <li onclick="myClick1(3)">PPT</li>
+            <li onclick="myClick1(4)">Report</li>
+            <li onclick="myClick1(5)">Delta AI</li>
+        </ul>
+    </div>
+    <!-- ============================================= ======-->
+    <script>
+        function myClick(no) {
+            // alert(mctrl);
+            if (no == 1)
+                window.location.href = "/";
+            else if (no == 2)
+                alert(no);
+            else if (no == 5)
+                window.location.href = "/ai";
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
+    <script src="static/js/functions-min.js"></script>
+    <script src="static/js/recognize.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#chatbox").keypress(function (e) {
+                if (e.key === 'Enter') { // Use modern event property for better readability
+                    call_back_end();
+                    e.preventDefault(); // Prevent the default form submission
+                }
+            });
+        });
+        function call_back_end() {
+            const query = $('#chatbox').val().trim();
+            // alert(query);
+            if (!query) {
+                alert("Please enter a query before submitting."); // Prevent empty requests
+            }
+            else if (typeof query === "string" && query.toLowerCase().includes("send mail to") || query.toLowerCase().includes("@")) {
+                document.getElementById("dload").style.display = "block";
+                $.ajax({
+                    data: {
+                        query: query.toLowerCase(), // pass email id
+                        log: $('#txtlog').val()  // pass body content
+                    },
+                    type: 'POST',
+                    url: '/myfun_mail', // Send Email
+                    success: function (data) { // Handle successful response                             
+                        console.log("Response found from Email");
+                        $('#txtlog').val(data.output).show();
+                        $("#divspeak").text(data.output);
+                        document.getElementById("dload").style.display = "none";
+                    },
+                    error: function (xhr, status, error) { // Handle errors
+                        console.error("An error occurred: " + error);
+                        $('#txtlog').val("An error occurred: " + error).show();
+                        document.getElementById("dload").style.display = "none";
+                    }
+                });
+            }
+            else {
+                document.getElementById("dload").style.display = "block";
+                $.ajax({
+                    data: {
+                        query: query // Pass the trimmed query
+                    },
+                    type: 'POST',
+                    url: '/myfun',
+                    success: function (data) { // Handle successful response
+                        if (data.output.includes("youtube.com")) {
+                            console.log("Music found!");
+                            $('#txtlog').val("Playing on Youtube....");
+                            $("#divspeak").text("Playing on Youtube.");
+                            // speak('div.aispeak');
+                            myFunction(data.output); // Function to handle YouTube link
+                        }
+                        // else if (data.output.includes("weather")) {
+                        else if (typeof data.output === "string" && data.output.includes("weather") && data.output.includes("feels_like")) {
+                            weather(data.output); // call Weather API
+                        }
+                        // else if (data.output.includes("list")) {
+                        else if (typeof data.output === "string" && data.output.includes("aqi") && data.output.includes("pm2_5")) {
+                            // alert(data.output); // call Pollution API
+                            pollution(data.output) // call Pollution API
+                        }
+                        else {
+                            console.log("Text found!");
+                            $('#txtlog').val(data.output).show();
+                            $("#divspeak").text(data.output);
+                            // speak('div.aispeak');
+                        }
+                        document.getElementById("dload").style.display = "none";
+                        
+                    },
+                    error: function (xhr, status, error) { // Handle errors
+                        console.error("An error occurred: " + error);
+                        $('#txtlog').val("An error occurred: " + error).show();
+                        document.getElementById("dload").style.display = "none";
+                    }
+                });
+
+            }
+        }
+
+        function pollution(output) {
+            try {
+                const validJsonStr = output.replace(/'/g, '"');
+                const weatherData = JSON.parse(validJsonStr); // Parse the string if it's JSON formatted
+                let city = "Air Pollution for - " + weatherData.city;
+                let now = new Date();
+                let aqi = weatherData.list[0].main.aqi; // Access the temperature
+                let co = weatherData.list[0].components.co;
+                let no = weatherData.list[0].components.no;
+                let no2 = weatherData.list[0].components.no2;
+                let o3 = weatherData.list[0].components.o3;
+                let so2 = weatherData.list[0].components.so2;
+                let pm2_5 = weatherData.list[0].components.pm2_5;
+                let pm10 = weatherData.list[0].components.pm10;
+                let nh3 = weatherData.list[0].components.nh3;
+                let temp = `Air Quality Index is : ${aqi} `;
+                let ftemp = `CO (Carbon monoxide) is : ${co} µg/m³`;
+                let hmdt = `NO2 (Nitrogen dioxide) is : ${no2} µg/m³`;
+                let speed2 = `O3 (Ozone) is : ${o3} µg/m³`;
+                let visibility2 = `SO2 (Sulphur dioxide) is  : ${so2} µg/m³`;
+                let pressure2 = `PM2.5 (Fine particles matter) is : ${pm2_5} µg/m³`;
+                let clouds2 = `PM10 (Coarse particulate matter) is : ${pm10} µg/m³`;
+                let weatherDesc2 = `NH3 (Ammonia) is : ${nh3} µg/m³`;
+                // Format date as dd-mm-yyyy
+                let day = String(now.getDate()).padStart(2, '0'); // Add leading zero
+                let month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                let year = now.getFullYear();
+                let formattedDate = `${day}-${month}-${year}`;
+
+                // Format time as hh:mm:ss
+                let hours = String(now.getHours()).padStart(2, '0'); // Add leading zero
+                let minutes = String(now.getMinutes()).padStart(2, '0');
+                let seconds = String(now.getSeconds()).padStart(2, '0');
+                let formattedTime = `${hours}:${minutes}:${seconds}`;
+                let dt = formattedDate + " | " + formattedTime;
+                let res = city + "\n" + dt + "\n" + temp + "\n" + ftemp + "\n" + weatherDesc2 + "\n" + hmdt + "\n" + speed2 + "\n" + visibility2 + "\n" + pressure2 + "\n" + clouds2;
+                $('#txtlog').val(res).show();
+                $("#divspeak").text(res);
+                $("#lblwidget").text("Air Pollution");
+                $("#lblcity").text(weatherData.city);
+                let aqi_value;
+                if (aqi === 1) {
+                    aqi_value = "Good";
+                    $("#imgicon").attr("src", "static/img/good.svg");
+                } else if (aqi === 2) {
+                    aqi_value = "Fair";
+                    $("#imgicon").attr("src", "static/img/fair.svg");
+                } else if (aqi === 3) {
+                    aqi_value = "Moderate";
+                    $("#imgicon").attr("src", "static/img/modrat.svg");
+                }
+                else if (aqi === 4) {
+                    aqi_value = "Poor";
+                    $("#imgicon").attr("src", "static/img/poor1.svg");
+                }
+                else if (aqi === 5) {
+                    aqi_value = "Very Poor";
+                    $("#imgicon").attr("src", "static/img/poor2.svg");
+                }
+                $("#lbltemp").text(aqi_value);
+                $("#btndesc").text('AQI ' + aqi);
+                $("#lblfeel").text('CO ' + co + ' µg/m³');
+                $("#lblhumty").text('NO2 ' + no2 + ' µg/m³');
+                $("#lblwind").text('O3 ' + o3 + ' µg/m³');
+                $("#visibility").text('SO2 ' + so2 + ' µg/m³');
+                $("#pressure").text('PM2.5 ' + pm2_5 + ' µg/m³');
+                $("#cloud").text('PM10 ' + pm10 + ' µg/m³');
+                $("#datetime").text('Updated: ' + dt);
+                // static/img/air.svg
+                mywidget(); // Call for Air Pollution
+            }
+            catch (err) {
+                alert("Error1: " + err.message)
+                // document.getElementById("demo").innerHTML = err.message;
+            }
+        }
+
+        function weather(output) {
+            try {
+                const validJsonStr = output.replace(/'/g, '"');
+                const weatherData = JSON.parse(validJsonStr); // Parse the string if it's JSON formatted
+                let city = "Weather Stats for - " + weatherData.name;
+                let now = new Date();
+                let temperature = weatherData.main.temp - 273.15; // Access the temperature
+                let feels_like = weatherData.main.feels_like - 273.15;
+                let humidity = weatherData.main.humidity;
+                let speed = weatherData.wind.speed;
+                let visibility = weatherData.visibility / 1000;
+                let pressure = weatherData.main.pressure;
+                let clouds = weatherData.clouds.all;
+                let weatherDesc = weatherData.weather[0].description;
+                let temp = `Temperature is : ${temperature.toFixed(2)} deg C`;
+                let ftemp = `Temperature Feels like is : ${feels_like.toFixed(2)} deg C`;
+                let hmdt = `Humidity is : ${humidity} %`;
+                let speed2 = `Wind Speed is : ${speed} kmph`;
+                let visibility2 = `Visibility is : ${visibility} km`;
+                let pressure2 = `Pressure is : ${pressure} mb`;
+                let clouds2 = `Cloudiness is : ${clouds} %`;
+                let weatherDesc2 = `Weather description is : ${weatherDesc}`;
+                // Format date as dd-mm-yyyy
+                let day = String(now.getDate()).padStart(2, '0'); // Add leading zero
+                let month = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+                let year = now.getFullYear();
+                let formattedDate = `${day}-${month}-${year}`;
+
+                // Format time as hh:mm:ss
+                let hours = String(now.getHours()).padStart(2, '0'); // Add leading zero
+                let minutes = String(now.getMinutes()).padStart(2, '0');
+                let seconds = String(now.getSeconds()).padStart(2, '0');
+                let formattedTime = `${hours}:${minutes}:${seconds}`;
+                let dt = formattedDate + " | " + formattedTime;
+                let res = city + "\n" + dt + "\n" + temp + "\n" + ftemp + "\n" + weatherDesc2 + "\n" + hmdt + "\n" + speed2 + "\n" + visibility2 + "\n" + pressure2 + "\n" + clouds2;
+                $('#txtlog').val(res).show();
+                $("#divspeak").text(res);
+                $("#lblwidget").text("Weather");
+                $("#lblcity").text(weatherData.name);
+                $("#lbltemp").text(temperature.toFixed(0) + '°C');
+                $("#btndesc").text(weatherDesc);
+                $("#lblfeel").text('Feels Like ' + feels_like.toFixed(2) + '°C');
+                $("#lblhumty").text('Humidity ' + humidity + ' %');
+                $("#lblwind").text('Wind Speed ' + speed + ' kmph');
+                $("#visibility").text('Visibility ' + visibility + ' km');
+                $("#pressure").text('Pressure ' + pressure + ' mb');
+                $("#cloud").text('Cloudiness ' + clouds + ' %');
+                $("#datetime").text('Updated: ' + dt);
+                $("#imgicon").attr("src", "static/img/weather.png");
+                mywidget(); // call for Weather report
+            }
+            catch (err) {
+                alert("Error2: " + err.message)
+                // document.getElementById("demo").innerHTML = err.message;
+            }
+        }
+        function _onchange(mctl) {
+            $("#divspeak").text(mctl.value);
+        }
+    </script>
+    <script>
+        function myFunction(mCtr) {
+            const popup = window.open(mCtr, "_blank", "toolbar=yes,scrollbars=yes,resizable=yes,top=100,left=400,width=600,height=500");
+            if (!popup || popup.closed || typeof popup.closed === 'undefined') {
+                alert("Popup was blocked. Please allow popups for this site.");
+            }
+        }
+    </script>
+    <!-- static/js/articulate.js -->
+    <script src="static/js/articulate.js"></script>
+    <script>
+        function speak(obj) {
+            // var text = $('#txtlog').val();
+            $(obj).articulate('speak');
+        };
+
+        function pause() {
+            $().articulate('pause');
+        };
+
+        function resume() {
+            $().articulate('resume');
+        };
+
+        function stop() {
+            $().articulate('stop');
+        };
+        function MySearch(message) {
+            $('#chatbox').val(message.innerText);
+            $('#chatbox').focus();
+        };
+        function MySearch2(ctrl) {
+            $('#chatbox').val(ctrl.title);
+            $('#chatbox').focus();
+        };
+        // function download() {
+        //     var a = document.body.appendChild(
+        //         document.createElement("a")
+        //     );
+        //     a.download = "mylog.txt";
+        //     a.href = "data:text/html," + document.getElementById("divspeak").innerHTML;
+        //     a.click();
+        // }
+        function download() {
+            const content = document.getElementById("divspeak").innerHTML;
+            const blob = new Blob([content], { type: "text/html" }); // Create a Blob for the content
+            const url = URL.createObjectURL(blob); // Create a URL for the Blob
+
+            const a = document.createElement("a");
+            a.download = "mylog.txt"; // Use a file extension matching the content type
+            a.href = url;
+            a.style.display = "none"; // Hide the anchor element
+
+            document.body.appendChild(a);
+            a.click();
+
+            // Cleanup
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url); // Free up the object URL memory
+        }
+
+
+    </script>
+    <div id="divspeak" class="aispeak" style="display: none;">
+
+    </div>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <!-- <div ></div> -->
+            <div class="widget">
+                <h1 id="lblwidget">-</h1>
+                <h2 id="lblcity">-</h2>
+                <img class="icon" id="imgicon" src="https://cdn-icons-png.flaticon.com/512/1163/1163661.png"
+                    alt="Weather Icon">
+                <div class="temp" id="lbltemp">-</div>
+                <div class="description">
+                    <button id="btndesc"
+                        style="color:red;font-weight:600;padding-left:20px;padding-right:20px;font-size:16px">-</button>
+                </div>
+                <div class="description"><span id="lblfeel" style="float:left;width:50%">-<span></div>
+                <div class="description" id="lblhumty" style="border:0px solid #000;">-</div>
+                <div class="description"><span id="lblwind" style="float:left;width:50%">-<span> </div>
+                <div class="description" id="visibility" style="border:0px solid #000;">-</div>
+                <div class="description"><span id="pressure" style="float:left;width:50%">-<span></div>
+                <div class="description" id="cloud" style="border:0px solid #000;">-</div>
+                <div class="footer" id="datetime">-</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const modal = document.getElementById("myModal");
+        // const btn = document.getElementById("openModal");
+        const span = document.getElementsByClassName("close")[0];
+
+        function mywidget() {
+            modal.style.display = "flex";
+        }
+
+        span.onclick = function () {
+            modal.style.display = "none";
+            // alert('H1');
+        }
+
+        window.onclick = function (event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+                // alert('H2');				
+            }
+        }
+    </script>
+</body>
+
+</html>
