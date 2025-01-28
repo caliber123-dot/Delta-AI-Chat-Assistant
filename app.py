@@ -23,23 +23,25 @@ def myfun_mail():
         log = request.form['log'] # Body
         formatted_log = log.replace('\n', '<br>')
         qry = query.lower().strip()
-        value = qry.replace("send mail to @", "").replace("send mail to", "").replace("@ to", "").replace("email :", "").replace("email:", "")
-        email_id = value.strip()
-        # print(email_id)
-        # print(log)
-        subject = "Delta AI Email Subject 01"
-        body = "Hello " + email_id + ",<br>" + formatted_log
-        sender = "caliberai123@gmail.com" #From
-        load_dotenv() # Load variables from .env file
-        password = os.getenv('PSW_Key')
-        recipients = [email_id] # To       
-        res = send_email(subject, body, sender, recipients, password)
-        if(res == 1):
-            print("Email sent successfully.")
-            return jsonify({'output':'Email sent successfully.'})
-        else:
-            print("Error in Email!!!")
-            return jsonify({'output': 'The error in Email.'})
+        try:
+            value = qry.replace("send mail to @", "").replace("send mail to", "").replace("@ to", "").replace("email :", "").replace("email:", "")
+            email_id = value.strip()
+            subject = "Delta AI Email Subject 01"
+            body = "Hello " + email_id + ",<br>" + formatted_log
+            sender = "caliberai123@gmail.com" #From
+            load_dotenv() # Load variables from .env file
+            password = os.getenv('PSW_Key')
+            recipients = [email_id] # To       
+            res = send_email(subject, body, sender, recipients, password)
+            if(res == 1):
+                print("Email sent successfully.")
+                return jsonify({'output':'Email sent successfully.'})
+            else:
+                print("Error in Email!!!")
+                return jsonify({'output': 'The error in Email.'})
+        except Exception as e:
+                print("The Email Error is: ", str(e))
+                return jsonify({'output': "The Email Error is : " + str(e)})
     return render_template('index.html')
 
 import smtplib
@@ -88,13 +90,9 @@ def take_cmd(query):
         topic = query.lower().replace('play ', '')
         response = playonyt(topic)  
     elif "weather" in query.lower():
-        # key, value = query.lower().split(":")
         qry = query.lower().strip()
         value = qry.replace("weather of", "").replace("weather for", "").replace("weather in", "").replace("weather :", "").replace("weather:", "").replace("weather", "").strip()
-        # import re
-        # value = re.sub(r"weather (of|for|in|:)\s*", "", query.lower()).strip()
-        # key, value = map(str.strip, query.lower().split(":"))
-        city_name = value
+        city_name = value        
         res = GetWeather(city_name)
         if res.status_code == 200:
             api_data = res.json()
