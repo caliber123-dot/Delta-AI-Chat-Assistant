@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Speech to Text</title>
     <style>
-        body { max-width: 600px; margin: 20px auto; padding: 20px; }
-        #output { height: 200px; border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
-        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
-        button:hover { background: #0056b3; }
+        body {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        #output {
+            height: 200px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
     </style>
 </head>
+
 <body>
     <h1>Speech to Text Converter</h1>
     <button id="startBtn">Start Listening</button>
@@ -24,21 +46,33 @@
         if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
             const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
             recognition = new SpeechRecognition();
-            
+
             // Configure recognition settings
             recognition.continuous = true;
             recognition.interimResults = true;
             recognition.lang = 'en-US';
 
+            let x = 0;
             // Event handlers
             recognition.onresult = (event) => {
                 let transcript = '';
                 for (let i = event.resultIndex; i < event.results.length; i++) {
+                    let speech = event.results[i][0].transcript;
                     if (event.results[i].isFinal) {
-                        transcript += event.results[i][0].transcript;
+                        // alert('isFinal == ' + transcript);
+                        transcript += speech;
                     } else {
-                        transcript += event.results[i][0].transcript + ' (processing...)';
+                        transcript += speech + ' (processing...)';
                     }
+                }
+                // alert(transcript);
+                if (transcript.toLowerCase().includes("go") || transcript.toLowerCase().includes("enter") || transcript.toLowerCase().includes("submit")) {
+                    transcript = transcript.replace(/go|enter|submit/gi, '').trim();
+                    // if (x === 0) {
+                    // alert("ALTERT ==" + transcript);
+                    stopListening();
+                    // x = x + 1;
+                    // }
                 }
                 output.innerHTML = transcript;
             };
@@ -61,7 +95,8 @@
                     stopListening();
                 }
             });
-        } else {
+        }
+        else {
             startBtn.disabled = true;
             output.textContent = 'Speech recognition not supported in this browser.';
         }
@@ -82,4 +117,5 @@
         }
     </script>
 </body>
+
 </html>
