@@ -12,6 +12,15 @@ import os
 
 app = Flask(__name__)
 
+@app.route('/ds')
+def ds():
+   return render_template('ds_mic.html')
+
+@app.route('/gpt')
+def gpt():
+   return render_template('gpt_mic.html')
+
+
 @app.route('/')
 def index():
    return render_template('index.html')
@@ -67,8 +76,8 @@ def myfun():
                 response = take_cmd(query)
                 return jsonify({'output':response})
             except Exception as e:
-                print("The error is: ", str(e))
-                return jsonify({'output': "The error is : " + str(e)})
+                print("The Error is: ", str(e))
+                return jsonify({'output': "The Error is : " + str(e)})
         else:
             return jsonify({'output':'Error!'})
     return render_template('index.html')

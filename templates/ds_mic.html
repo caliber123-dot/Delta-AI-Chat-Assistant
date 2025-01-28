@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speech to Text</title>
+    <style>
+        body { max-width: 600px; margin: 20px auto; padding: 20px; }
+        #output { height: 200px; border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+        button:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>Speech to Text Converter</h1>
+    <button id="startBtn">Start Listening</button>
+    <div id="output"></div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const output = document.getElementById('output');
+        let recognition;
+        let isListening = false;
+
+        // Check for browser support
+        if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            recognition = new SpeechRecognition();
+            
+            // Configure recognition settings
+            recognition.continuous = true;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+
+            // Event handlers
+            recognition.onresult = (event) => {
+                let transcript = '';
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    if (event.results[i].isFinal) {
+                        transcript += event.results[i][0].transcript;
+                    } else {
+                        transcript += event.results[i][0].transcript + ' (processing...)';
+                    }
+                }
+                output.innerHTML = transcript;
+            };
+
+            recognition.onerror = (event) => {
+                console.error('Speech recognition error:', event.error);
+                stopListening();
+            };
+
+            recognition.onend = () => {
+                if (isListening) {
+                    recognition.start();
+                }
+            };
+
+            startBtn.addEventListener('click', () => {
+                if (!isListening) {
+                    startListening();
+                } else {
+                    stopListening();
+                }
+            });
+        } else {
+            startBtn.disabled = true;
+            output.textContent = 'Speech recognition not supported in this browser.';
+        }
+
+        function startListening() {
+            recognition.start();
+            isListening = true;
+            startBtn.textContent = 'Stop Listening';
+            startBtn.style.backgroundColor = '#dc3545';
+            output.innerHTML = 'Listening...';
+        }
+
+        function stopListening() {
+            recognition.stop();
+            isListening = false;
+            startBtn.textContent = 'Start Listening';
+            startBtn.style.backgroundColor = '#007bff';
+        }
+    </script>
+</body>
+</html>

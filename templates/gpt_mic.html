@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice to Text</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button id="start-btn" class="">Start Listening</button>
+  <!-- <button id="micBtn" class="glow-on-hover" onclick="Myfunction()"><i class="bi bi-mic"></i></button> -->
+  <p id="output">Transcript: <span id="transcript"></span></p>
+  <p id="status">Status: Not started</p>
+  <!-- <script src="script.js"></script> -->
+</body>
+</html>
+<script>
+// Check browser support for SpeechRecognition
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+if (SpeechRecognition) {
+  const recognition = new SpeechRecognition();
+  const startButton = document.getElementById('start-btn');
+  const transcriptOutput = document.getElementById('transcript');
+  const statusOutput = document.getElementById('status');
+
+  // Set recognition settings
+  recognition.lang = 'en-US'; // Set the language
+  recognition.interimResults = true; // Show results while speaking
+  recognition.continuous = true; // Keep listening until stopped
+
+  // Event: When speech is recognized
+  recognition.onresult = (event) => {
+    let transcript = '';
+    for (const result of event.results) {
+      transcript += result[0].transcript;
+    }
+    transcriptOutput.textContent = transcript.trim();
+  };
+
+  // Event: When recognition starts
+  recognition.onstart = () => {
+    statusOutput.textContent = 'Status: Listening...';
+  };
+
+  // Event: When recognition stops
+  recognition.onend = () => {
+    statusOutput.textContent = 'Status: Not listening';
+  };
+
+  // Event: On error
+  recognition.onerror = (event) => {
+    console.error('Speech Recognition Error:', event.error);
+    statusOutput.textContent = `Error: ${event.error}`;
+  };
+
+  // Toggle recognition with button
+  let isListening = false;
+  startButton.addEventListener('click', () => {
+    if (isListening) {
+      recognition.stop();
+      startButton.textContent = 'Start Listening';
+    } else {
+      recognition.start();
+      startButton.textContent = 'Stop Listening';
+    }
+    isListening = !isListening;
+  });
+} else {
+  alert('Speech Recognition is not supported in this browser. Please use Chrome or Edge.');
+}
+</script>
