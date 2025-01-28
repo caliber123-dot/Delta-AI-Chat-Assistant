@@ -1,0 +1,10 @@
+# Ensure consistent line endings
+* text=auto
+*.css text eol=lf
+*.js text eol=lf
+*.html text eol=lf
+*.svg text eol=lf
+
+# After adding this file, run the following commands to normalize the line endings:
+# git add --renormalize .
+# git commit -m "Normalize line endings"
