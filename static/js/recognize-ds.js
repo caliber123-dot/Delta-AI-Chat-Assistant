@@ -31,26 +31,37 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
             if (transcript == '' || transcript == '(processing...)')
                 // alert('Empty..');
                 console.log("Empty");
-            else
+            else {
+                isListening = false;
                 recognition.stop();
-
+                // stopListening();
+            }
         }
         output.value = transcript;
     };
 
     recognition.onerror = (event) => {
         console.error('Speech recognition error:', event.error);
-        stopListening();
+        isListening = false;
+        recognition.stop();
     };
 
+    // Event: When recognition.stop() call..
     recognition.onend = () => {
         // alert("H-onend" + output.value);
-        call_back_end();
-        isListening = false;
-        output.value = '';
-        output.placeholder = "Ask me anything.";
-        startBtn.classList.remove("active");        
-        output.classList.remove("myplaceholder");
+        if (isListening) {
+            recognition.start();
+        }
+        else {
+            // console.info('Back End Code..');
+            // alert('Back End Calling...')
+            call_back_end();
+            isListening = false;
+            output.value = '';
+            output.placeholder = "Ask me anything.";
+            startBtn.classList.remove("active");
+            output.classList.remove("myplaceholder");
+        }
     };
 
     startBtn.addEventListener('click', () => {
@@ -63,7 +74,7 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
 }
 else {
     // startBtn.disabled = true;
-    output.textContent = 'Speech recognition not supported in this browser.';
+    output.value = 'Speech recognition not supported in this browser.';
 }
 
 function startListening() {
