@@ -50,6 +50,7 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
     recognition.onend = () => {
         // alert("H-onend" + output.value);
         if (isListening) {
+            // alert('isListening');
             recognition.start();
             output.value = '';
             output.placeholder = "Start Listening...";

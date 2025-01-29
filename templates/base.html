@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="static/css/main.css">
     <link rel="stylesheet" href="static/css/widget.css">
     <link rel="stylesheet" href="static/css/style2.css">
+    <link rel="stylesheet" href="static/css/ddl.css">
     <style>
         .button-container {
             display: flex;
@@ -138,6 +139,16 @@
             font-size: 20px;
             color: greenyellow;
         }
+        .image-button6 {
+            position: absolute;
+            bottom: 0px;
+            right: 0px;
+            transform: translateY(-50%);
+            border: none;
+            background: none;
+            cursor: pointer;
+            padding: 0;           
+        }
 
         .image-button4 {
             position: absolute;
@@ -228,7 +239,7 @@
     <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
     <script src="static/js/functions-min.js"></script>
     <script src="static/js/recognize-ds.js"></script>
-
+    <script src="static/js/ddl.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#chatbox").keypress(function (e) {
@@ -242,6 +253,8 @@
             const query = $('#chatbox').val().trim();
             // alert(query);
             if (!query) {
+                // let myselect = submitSelection();
+                // alert(myselect);
                 alert("Please enter a query before submitting."); // Prevent empty requests
             }
             else if (typeof query === "string" && query.toLowerCase().includes("send mail to") || query.toLowerCase().includes("@")) {
@@ -268,9 +281,11 @@
             }
             else {
                 document.getElementById("dload").style.display = "block";
+                let myselect = submitSelection();
                 $.ajax({
                     data: {
-                        query: query // Pass the trimmed query
+                        query: query, // Pass the trimmed query
+                        model: myselect
                     },
                     type: 'POST',
                     url: '/myfun',

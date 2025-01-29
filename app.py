@@ -71,9 +71,11 @@ def send_email(subject, body, sender, recipients, password):
 def myfun():
     if request.method == "POST":
         query = request.form['query']
+        model = request.form['model'] # Model Name
+        # print(model)
         if len(query.strip()) > 0:  
             try:
-                response = take_cmd(query)
+                response = take_cmd(query, model)
                 return jsonify({'output':response})
             except Exception as e:
                 print("The Error is: ", str(e))
@@ -83,7 +85,7 @@ def myfun():
     return render_template('index.html')
 
 import time
-def take_cmd(query):
+def take_cmd(query, model):
     a1 = ["hello", "namaskar", "namaste", "namskar" , "namste", "salam"]
     a2 = ["who r u", "who r u?" , "w r u", "who are you", "who are you?", "how are you", "h r u", "how r u"]
     response = ""
@@ -136,11 +138,19 @@ def take_cmd(query):
     else:        
         load_dotenv() # Load variables from .env file
         api_key = os.getenv('HF_TOKEN')
-        model_1 = os.getenv('MODEL_1')    
         os.environ["HF_TOKEN"] = api_key
-        # model_1 = "microsoft/Phi-3.5-mini-instruct"
-        # model_1 = "mistralai/Mistral-Nemo-Instruct-2407" 
-        repo_id = model_1 
+        myModel = ''
+        if model == 'Model 1':            
+            myModel = os.getenv('MODEL_1')   
+        elif model == 'Model 2':
+            myModel = os.getenv('MODEL_2') 
+        elif model == 'Model 3':
+            myModel = os.getenv('MODEL_3') 
+        elif model == 'Model 4':
+            myModel = os.getenv('MODEL_4') 
+        
+        repo_id = myModel 
+        print(repo_id)
         My_client = InferenceClient(model=repo_id, timeout=120,)
         response = call_chatBot(My_client, query)
     return response

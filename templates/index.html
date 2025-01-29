@@ -170,6 +170,18 @@
           <button type="button" class="image-button5" title="Download" onclick="download()">
             <i class="fa fa-download" aria-hidden="true"></i>
           </button>
+          <div class="dropdown image-button6">
+            <button type="button" id="dropdownButton" class="dropdown-button" onclick="toggleDropdown()">
+                <span id="buttonText">Model 1</span>
+                <span class="arrow"><i class="fa fa-angle-down" aria-hidden="true"></i></span>
+            </button>
+            <div id="dropdownMenu" class="dropdown-content">
+                <label><input type="checkbox" name="options" value="Model 1" onclick="selectOnlyOne(this)" checked> Model 1</label>
+                <label><input type="checkbox" name="options" value="Model 2" onclick="selectOnlyOne(this)"> Model 2</label>
+                <label><input type="checkbox" name="options" value="Model 3" onclick="selectOnlyOne(this)"> Model 3</label>
+                <label><input type="checkbox" name="options" value="Model 4" onclick="selectOnlyOne(this)"> Model 4</label>
+            </div>
+        </div>
           <!-- =========Load========== -->
           <div class="container1 image-button4" style="text-align: center">
             <div id="dload" style="display: none;">
