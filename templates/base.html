@@ -227,7 +227,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="static/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
     <script src="static/js/functions-min.js"></script>
-    <script src="static/js/recognize.js"></script>
+    <script src="static/js/recognize-ds.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -293,9 +293,11 @@
                         }
                         else {
                             console.log("Text found!");
+                            // const response = data.output;
+                            // const output = response.replace(/\*\*(.+?)\*\*/g, "<h4>$1</h4>");
                             $('#txtlog').val(data.output).show();
                             $("#divspeak").text(data.output);
-                            // speak('div.aispeak');
+                            
                         }
                         document.getElementById("dload").style.display = "none";
                         
