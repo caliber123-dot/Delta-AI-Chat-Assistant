@@ -51,6 +51,10 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         // alert("H-onend" + output.value);
         if (isListening) {
             recognition.start();
+            output.value = '';
+            output.placeholder = "Start Listening...";
+            startBtn.classList.add("active");
+            output.classList.add("myplaceholder");
         }
         else {
             // console.info('Back End Code..');
