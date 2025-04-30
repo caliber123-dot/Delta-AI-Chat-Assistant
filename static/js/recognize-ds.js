@@ -91,11 +91,11 @@ function startListening() {
 }
 
 function stopListening() {
-    recognition.stop();
     isListening = false;
-    output.value = '';
-    output.placeholder = "Ask me anything.";
-    startBtn.classList.remove("active");
-    output.classList.remove("myplaceholder");
+    recognition.stop();    
+    // output.value = '';
+    // output.placeholder = "Ask me anything.";
+    // startBtn.classList.remove("active");
+    // output.classList.remove("myplaceholder");
     // alert("function stopListening()");
 }

@@ -60,9 +60,11 @@
                     let speech = event.results[i][0].transcript;
                     if (event.results[i].isFinal) {
                         // alert('isFinal == ' + transcript);
+                        event.results[i].isFinal = false;
                         transcript += speech;
                     } else {
-                        transcript += speech + ' (processing...)';
+                        // transcript += speech + ' (processing...)';
+                        transcript += speech;
                     }
                 }
                 // alert(transcript);
@@ -70,7 +72,10 @@
                     transcript = transcript.replace(/go|enter|submit/gi, '').trim();
                     // if (x === 0) {
                     // alert("ALTERT ==" + transcript);
-                    stopListening();
+                    isListening = false;
+                    recognition.stop();
+
+                    // stopListening();
                     // x = x + 1;
                     // }
                 }
@@ -86,9 +91,12 @@
                 if (isListening) {
                     recognition.start();
                 }
-                else{
+                else {
                     console.info('Back End Code..');
-                    alert('Back End Calling...')
+                    alert('Back End Calling. # ' + output.innerHTML);
+                    startBtn.textContent = 'Start Listening';
+                    startBtn.style.backgroundColor = '#007bff';
+                    output.innerHTML ='';
                 }
             };
 
@@ -114,10 +122,10 @@
         }
 
         function stopListening() {
-            recognition.stop();
             isListening = false;
-            startBtn.textContent = 'Start Listening';
-            startBtn.style.backgroundColor = '#007bff';
+            recognition.stop();
+            // startBtn.textContent = 'Start Listening';
+            // startBtn.style.backgroundColor = '#007bff';
         }
     </script>
 </body>

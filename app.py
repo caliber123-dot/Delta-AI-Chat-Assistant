@@ -12,14 +12,13 @@ import os
 
 app = Flask(__name__)
 
-@app.route('/ds')
+@app.route('/ds') # For Testing
 def ds():
    return render_template('ds_mic.html')
 
-@app.route('/gpt')
+@app.route('/gpt') # For Testing
 def gpt():
    return render_template('gpt_mic.html')
-
 
 @app.route('/')
 def index():
@@ -85,6 +84,8 @@ def myfun():
     return render_template('index.html')
 
 import time
+from deepinfraAPI import CallDeepInfraAPI
+from cohereAPI import CallCohereAPI
 def take_cmd(query, model):
     a1 = ["hello", "namaskar", "namaste", "namskar" , "namste", "salam"]
     a2 = ["who r u", "who r u?" , "w r u", "who are you", "who are you?", "how are you", "h r u", "how r u"]
@@ -135,24 +136,28 @@ def take_cmd(query, model):
         response = GetNews("Sports") + "\n"
         response += GetNews("Technology") + "\n"
         response += GetNews("Entertainment")
-    else:        
-        load_dotenv() # Load variables from .env file
-        api_key = os.getenv('HF_TOKEN')
-        os.environ["HF_TOKEN"] = api_key
-        myModel = ''
-        if model == 'Model 1':            
-            myModel = os.getenv('MODEL_1')   
-        elif model == 'Model 2':
-            myModel = os.getenv('MODEL_2') 
-        elif model == 'Model 3':
-            myModel = os.getenv('MODEL_3') 
-        elif model == 'Model 4':
-            myModel = os.getenv('MODEL_4') 
-        
-        repo_id = myModel 
-        print(repo_id)
-        My_client = InferenceClient(model=repo_id, timeout=120,)
-        response = call_chatBot(My_client, query)
+    else:
+        if model == 'Model 1':  
+            response = "🤖 AI DeepInfra Response:\n" + CallDeepInfraAPI(query) 
+        else:
+            response = "🤖 AI Cohere Response:\n" + CallCohereAPI(query)
+
+        # load_dotenv() # Load variables from .env file
+        # api_key = os.getenv('HF_TOKEN')
+        # # os.environ["HF_TOKEN"] = api_key
+        # myModel = ''
+        # if model == 'Model 1':            
+        #     myModel = os.getenv('MODEL_1')   
+        # elif model == 'Model 2':
+        #     myModel = os.getenv('MODEL_2') 
+        # elif model == 'Model 3':
+        #     myModel = os.getenv('MODEL_3') 
+        # elif model == 'Model 4':
+        #     myModel = os.getenv('MODEL_4')
+        # repo_id = myModel 
+        # print(repo_id)
+        # My_client = InferenceClient(model=repo_id, timeout=120,)
+        # response = call_chatBot(My_client, query)
     return response
 
 def call_chatBot(inference_client: InferenceClient, prompt: str):
